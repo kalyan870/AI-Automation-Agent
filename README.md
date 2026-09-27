@@ -46,3 +46,6 @@ This project is actively evolving as I improve agent behavior, workflow reliabil
 Built by [Kalyan](https://github.com/kalyan870).
 
 Feedback and suggestions are welcome.
+## Repository status
+
+This repository currently contains project documentation only; the application source and local setup files are not tracked. The demo link above is the only way listed here to inspect the interface, and it may change. Add the app source and tool-permission model before presenting the project as reproducible or allowing an agent to perform real actions.
