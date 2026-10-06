@@ -1,51 +1,50 @@
 # AI Automation Agent
 
-An AI-powered workflow automation project designed to reduce repetitive work by connecting tools, processing information intelligently, and executing tasks with minimal manual effort.
+An interactive workflow-automation demo for exploring triggers, actions, review steps, and sample outputs. It helps explain how a workflow could be organized before connecting real services.
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Open%20App-2ea44f?style=for-the-badge)](https://ai-automation-agent-phi.vercel.app/)
 
-## Overview
+## What this demo does
 
-AI Automation Agent explores how intelligent systems can coordinate tools and workflows to turn natural-language goals into useful actions.
+The browser-based demo lets you choose a sample trigger, select an action, enter example text, and preview the result. It includes a local activity list and setup guidance for common integration patterns.
 
-## Core capabilities
+### Available in the demo
 
-- Automate repetitive and time-consuming tasks
-- Connect multiple tools in a single workflow
-- Process information and determine next steps
-- Execute actions with reduced manual intervention
-- Provide a foundation for extensible AI-assisted workflows
+- Create and run a sample workflow in the current browser
+- Preview a reply draft, text summary, priority suggestion, or handoff
+- Review demo activity stored locally in the browser
+- Read setup guidance for Email, Slack, Notion, and REST API examples
+- Switch between dark and light themes
 
-## Workflow
+### Try it
 
-1. Receive a task or goal
-2. Understand the required actions
-3. Select the appropriate tools
-4. Process inputs and intermediate results
-5. Execute the workflow
-6. Return a useful result
+1. Open the [live demo](https://ai-automation-agent-phi.vercel.app/).
+2. Scroll to **Workflow builder**.
+3. Select a trigger and action, then run the sample.
+4. Inspect the preview and the local activity row.
 
-## Why this project matters
+## Demo limits and safety
 
-Automation is most valuable when it removes friction from recurring work while keeping the workflow understandable and controllable. This project focuses on that intersection of AI reasoning, tool use, and practical productivity.
+This version is an interactive front-end demonstration. It does not call an AI model, connect to an external account, send email, change cloud resources, or perform background automation. Sample summaries and classifications use simple browser-side rules and are not factual or operational decisions. Activity and preferences are stored only in the current browser.
 
-## Live demo
+Real integrations need a server-side implementation, provider credentials, scoped permissions, and human review before external actions.
 
-[Open AI Automation Agent](https://ai-automation-agent-phi.vercel.app/)
+## Project structure
 
-## Tech focus
+- `index.html` — accessible single-page interface
+- `styles.css` — responsive styling and dark/light themes
+- `app.js` — local workflow simulation and browser-only activity state
 
-AI Agents • Workflow Automation • Tool Integration • Task Orchestration • Full-Stack Development
+## Run locally
 
-## Project status
+Serve this directory with any static HTTP server, or deploy it to Vercel. No build step or package installation is needed.
 
-This project is actively evolving as I improve agent behavior, workflow reliability, and user experience.
+## Related project
+
+[Multi Cloud Platform](https://multi-cloud-platform.vercel.app/) is a separate cloud-resource dashboard project; it is not this workflow demo.
 
 ## Author
 
 Built by [Kalyan](https://github.com/kalyan870).
 
 Feedback and suggestions are welcome.
-## Repository status
-
-This repository currently contains project documentation only; the application source and local setup files are not tracked. The demo link above is the only way listed here to inspect the interface, and it may change. Add the app source and tool-permission model before presenting the project as reproducible or allowing an agent to perform real actions.
