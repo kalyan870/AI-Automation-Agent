@@ -11,13 +11,20 @@
   const readState = () => {
     try {
       const value = JSON.parse(localStorage.getItem(storeKey) || '{}');
+      const activity = Array.isArray(value.activity) ? value.activity.slice(0, 8) : [];
+      const names = Array.isArray(value.workflowNames) ? value.workflowNames.filter((name) => typeof name === 'string') : [];
+      activity.forEach((item) => {
+        if (typeof item.name === 'string') names.push(item.name.trim().toLocaleLowerCase());
+      });
+      const workflowNames = [...new Set(names)];
       return {
         runs: Number.isFinite(value.runs) ? value.runs : 0,
-        workflows: Number.isFinite(value.workflows) ? value.workflows : 0,
-        activity: Array.isArray(value.activity) ? value.activity.slice(0, 8) : [],
+        workflows: Math.max(Number.isFinite(value.workflows) ? value.workflows : 0, workflowNames.length),
+        workflowNames,
+        activity,
       };
     } catch {
-      return { runs: 0, workflows: 0, activity: [] };
+      return { runs: 0, workflows: 0, workflowNames: [], activity: [] };
     }
   };
   let data = readState();
@@ -84,9 +91,16 @@
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+    const workflowName = nameInput.value.trim();
+    const sample = input.value.trim();
+    if (!workflowName || !sample) {
+      notify(!workflowName ? 'Enter a workflow name first.' : 'Enter sample text before running the workflow.');
+      (!workflowName ? nameInput : input).focus();
+      return;
+    }
     const action = actionInput.value;
     const trigger = $('#trigger').value;
-    const preview = makePreview(action, input.value);
+    const preview = makePreview(action, sample);
     $('#resultPlaceholder').hidden = true;
     const output = $('#resultOutput');
     output.hidden = false;
@@ -94,9 +108,13 @@
     $('#runStatus').textContent = 'Local sample completed just now';
     $('#resultState').textContent = 'Preview ready';
     data.runs += 1;
-    if (!data.activity.some((item) => item.name === nameInput.value.trim())) data.workflows += 1;
+    const normalizedName = workflowName.toLocaleLowerCase();
+    if (!data.workflowNames.includes(normalizedName)) {
+      data.workflowNames.push(normalizedName);
+      data.workflows += 1;
+    }
     data.activity.unshift({
-      name: nameInput.value.trim() || 'Untitled workflow', trigger,
+      name: workflowName, trigger,
       result: action === 'Draft a reply' ? 'Draft prepared' : 'Preview prepared',
       time: new Intl.DateTimeFormat(undefined, { hour: 'numeric', minute: '2-digit' }).format(new Date()),
     });
@@ -110,6 +128,7 @@
     data.activity = [];
     data.runs = 0;
     data.workflows = 0;
+    data.workflowNames = [];
     $('#resultPlaceholder').hidden = false;
     $('#resultOutput').hidden = true;
     $('#runStatus').textContent = 'Ready for a sample run';
@@ -138,6 +157,13 @@
   document.querySelectorAll('[data-guide]').forEach((button) => button.addEventListener('click', () => {
     const name = button.dataset.guide;
     showDialog(`${name} setup guide`, `<p><b>${escapeHtml(name)}</b> is shown as an integration example only. This public demo has no connected account.</p><ul><li>Choose an approved account and the minimum required permissions.</li><li>Store credentials on a protected server, never in browser code.</li><li>Add a human review step before sending or changing external data.</li></ul><p>These setup steps are guidance; the demo does not connect or transmit anything.</p>`, 'INTEGRATION GUIDE');
+  }));
+
+  document.querySelectorAll('[data-sample-action]').forEach((button) => button.addEventListener('click', () => {
+    actionInput.value = button.dataset.sampleAction;
+    $('#trigger').value = button.dataset.sampleTrigger;
+    $('#workflow').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    notify(`${button.dataset.sampleAction} selected. Review the sample, then run it.`);
   }));
 
   document.querySelectorAll('a[href^="#"]').forEach((link) => link.addEventListener('click', (event) => {

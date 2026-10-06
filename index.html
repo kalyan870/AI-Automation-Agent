@@ -47,9 +47,9 @@
       <section id="features" class="section shell">
         <div class="section-heading"><div><span class="eyebrow">WHAT IT CAN HELP WITH</span><h2>Make routine work easier to follow</h2></div><p>These are workflow patterns to explore. Real integrations need a configured service and explicit permissions.</p></div>
         <div class="feature-grid">
-          <article class="feature-card"><span class="feature-icon blue">↻</span><h3>Multi-step workflows</h3><p>Move information through a trigger, a processing step, and a clear next action.</p><div class="tags"><span>Triggers</span><span>Steps</span><span>Review</span></div></article>
-          <article class="feature-card"><span class="feature-icon pink">✉</span><h3>Email reply drafts</h3><p>Prepare a suggested response for a person to review. The demo never sends email.</p><div class="tags"><span>Drafts</span><span>Summaries</span><span>Approval</span></div></article>
-          <article class="feature-card"><span class="feature-icon green">▥</span><h3>Data summaries</h3><p>Turn sample notes into a concise summary or a structured handoff.</p><div class="tags"><span>Text</span><span>Insights</span><span>Reports</span></div></article>
+          <article class="feature-card"><span class="feature-icon blue">↻</span><h3>Multi-step workflows</h3><p>Move information through a trigger, a processing step, and a clear next action.</p><div class="tags"><span>Triggers</span><span>Steps</span><span>Review</span></div><button class="outline-button try-sample" type="button" data-sample-action="Classify priority" data-sample-trigger="Scheduled check sample">Try a workflow</button></article>
+          <article class="feature-card"><span class="feature-icon pink">✉</span><h3>Email reply drafts</h3><p>Prepare a suggested response for a person to review. This creates a draft only; it never sends email.</p><div class="tags"><span>Drafts</span><span>Human review</span><span>No sending</span></div><button class="outline-button try-sample" type="button" data-sample-action="Draft a reply" data-sample-trigger="New email sample">Try a reply draft</button></article>
+          <article class="feature-card"><span class="feature-icon green">▥</span><h3>Data summaries</h3><p>Turn sample notes into a concise summary or a structured handoff.</p><div class="tags"><span>Text</span><span>Insights</span><span>Reports</span></div><button class="outline-button try-sample" type="button" data-sample-action="Summarize text" data-sample-trigger="Form submitted sample">Try a summary</button></article>
         </div>
       </section>
 
@@ -60,7 +60,7 @@
             <div class="panel-title"><div><span class="panel-icon">✦</span><div><h3>Configure a demo workflow</h3><p>Pick an example and change the inputs.</p></div></div><span class="badge">Local preview</span></div>
             <label for="workflowName">Workflow name</label><input id="workflowName" name="workflowName" maxlength="80" value="Inbox triage demo" required />
             <div class="field-row"><div><label for="trigger">Trigger</label><select id="trigger"><option value="New email sample">New email sample</option><option value="Form submitted sample">Form submitted sample</option><option value="Scheduled check sample">Scheduled check sample</option></select></div><div><label for="action">Then</label><select id="action"><option value="Draft a reply">Draft a reply</option><option value="Summarize text">Summarize text</option><option value="Classify priority">Classify priority</option><option value="Create a handoff">Create a handoff</option></select></div></div>
-            <label for="sampleInput">Sample input</label><textarea id="sampleInput" rows="5" maxlength="1200">Hi, I need help understanding the next steps for my application. Could you send me the timeline and required documents?</textarea>
+            <label for="sampleInput">Sample input</label><textarea id="sampleInput" rows="5" maxlength="1200" required>Hi, I need help understanding the next steps for my application. Could you send me the timeline and required documents?</textarea>
             <div class="form-foot"><span id="charCount">0 / 1200</span><button class="button" type="submit">Run demo workflow <span aria-hidden="true">→</span></button></div>
           </form>
           <section class="panel result-panel" aria-live="polite">
