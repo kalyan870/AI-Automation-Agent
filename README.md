@@ -48,3 +48,10 @@ Serve this directory with any static HTTP server, or deploy it to Vercel. No bui
 Built by [Kalyan](https://github.com/kalyan870).
 
 Feedback and suggestions are welcome.
+
+## Architecture
+
+
+![AI-Automation-Agent architecture map](docs/images/ai-automation-agent-architecture.png)
+
+[Architecture notes](docs/architecture.md) · [Editable SVG](docs/images/ai-automation-agent-architecture.svg)
